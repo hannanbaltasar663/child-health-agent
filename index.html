@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>儿童青少年生长发育与眼健康可信问询 Agent 原型</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="sidebar" aria-label="项目导航">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">A</div>
+          <div>
+            <h1>Child Health Agent</h1>
+            <p>生长发育 · 近视防控 · 风险沟通</p>
+          </div>
+        </div>
+
+        <nav class="nav-list" aria-label="功能模块">
+          <button class="nav-item active" type="button" data-view="assessment" title="生长发育自测">
+            <span aria-hidden="true">⌁</span>
+            <span>综合评估</span>
+          </button>
+          <button class="nav-item" type="button" data-view="agent" title="智能追问与科普">
+            <span aria-hidden="true">◌</span>
+            <span>Agent 问询</span>
+          </button>
+          <button class="nav-item" type="button" data-view="followup" title="随访建议">
+            <span aria-hidden="true">⌾</span>
+            <span>随访闭环</span>
+          </button>
+        </nav>
+
+        <section class="source-panel">
+          <h2>可信知识层</h2>
+          <dl>
+            <div>
+              <dt>指南条目</dt>
+              <dd>168</dd>
+            </div>
+            <div>
+              <dt>问答模板</dt>
+              <dd>124</dd>
+            </div>
+            <div>
+              <dt>专家审核</dt>
+              <dd>进行中</dd>
+            </div>
+          </dl>
+        </section>
+      </aside>
+
+      <section class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Crowd-sensing trustworthy inquiry agent</p>
+            <h2>儿童生长发育与眼健康风险沟通</h2>
+            <p class="topbar-copy">一个面向基层和学校场景的可信问询原型：先补全信息，再进行循证科普、近视防控提示和分级就医建议。</p>
+          </div>
+          <div class="safety-badge">
+            <span aria-hidden="true">✓</span>
+            <span>科普与风险提示，不替代医生诊断</span>
+          </div>
+        </header>
+
+        <section class="metric-strip" aria-label="系统指标">
+          <article>
+            <span>风险沟通</span>
+            <strong id="riskLevel">待评估</strong>
+          </article>
+          <article>
+            <span>信息完整度</span>
+            <strong id="completeness">0%</strong>
+          </article>
+          <article>
+            <span>眼健康提示</span>
+            <strong id="eyeLevel">待评估</strong>
+          </article>
+          <article>
+            <span>随访周期</span>
+            <strong id="followCycle">未生成</strong>
+          </article>
+        </section>
+
+        <section class="view active" id="assessment" aria-labelledby="assessmentTitle">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Step 01</p>
+              <h3 id="assessmentTitle">综合风险信息采集</h3>
+            </div>
+            <button class="secondary-button" type="button" id="loadDemo">载入示例</button>
+          </div>
+
+          <form class="assessment-grid" id="assessmentForm">
+            <div class="form-section wide">
+              <span>Growth and puberty</span>
+              <strong>生长发育与青春期</strong>
+            </div>
+            <label>
+              <span>年龄</span>
+              <input name="age" type="number" min="1" max="18" step="0.1" placeholder="例如 9.2" />
+            </label>
+            <label>
+              <span>性别</span>
+              <select name="sex">
+                <option value="">请选择</option>
+                <option value="girl">女</option>
+                <option value="boy">男</option>
+              </select>
+            </label>
+            <label>
+              <span>身高 cm</span>
+              <input name="height" type="number" min="60" max="210" placeholder="例如 135" />
+            </label>
+            <label>
+              <span>体重 kg</span>
+              <input name="weight" type="number" min="5" max="160" placeholder="例如 38" />
+            </label>
+            <label>
+              <span>父亲身高 cm</span>
+              <input name="fatherHeight" type="number" min="120" max="220" placeholder="可选" />
+            </label>
+            <label>
+              <span>母亲身高 cm</span>
+              <input name="motherHeight" type="number" min="120" max="220" placeholder="可选" />
+            </label>
+            <label>
+              <span>近一年长高 cm</span>
+              <input name="growthVelocity" type="number" min="0" max="25" step="0.1" placeholder="例如 4.5" />
+            </label>
+            <label>
+              <span>每日运动 min</span>
+              <input name="exercise" type="number" min="0" max="300" placeholder="例如 35" />
+            </label>
+            <label>
+              <span>睡眠 h</span>
+              <input name="sleep" type="number" min="3" max="14" step="0.1" placeholder="例如 8.5" />
+            </label>
+            <label>
+              <span>屏幕时间 h</span>
+              <input name="screen" type="number" min="0" max="12" step="0.1" placeholder="例如 2" />
+            </label>
+            <div class="form-section wide">
+              <span>Eye health</span>
+              <strong>近视防控与用眼行为</strong>
+            </div>
+            <label>
+              <span>每日户外 h</span>
+              <input name="outdoor" type="number" min="0" max="8" step="0.1" placeholder="例如 1.2" />
+            </label>
+            <label>
+              <span>近距离用眼 h</span>
+              <input name="nearWork" type="number" min="0" max="12" step="0.1" placeholder="例如 3.5" />
+            </label>
+            <label>
+              <span>裸眼视力</span>
+              <input name="vision" type="number" min="0.1" max="5.3" step="0.1" placeholder="例如 4.8" />
+            </label>
+            <label>
+              <span>近视度数 D</span>
+              <input name="myopia" type="number" min="0" max="1200" step="25" placeholder="没有可填 0" />
+            </label>
+            <label class="wide">
+              <span>主要担忧</span>
+              <textarea name="concern" rows="4" placeholder="例如：孩子有点胖、最近发育提前，视力也下降，担心是不是生活方式出了问题。"></textarea>
+            </label>
+            <fieldset class="wide check-panel">
+              <legend>观察到的风险信号</legend>
+              <label><input type="checkbox" name="signals" value="puberty" /> 第二性征较早出现</label>
+              <label><input type="checkbox" name="signals" value="rapidPuberty" /> 发育进展较快</label>
+              <label><input type="checkbox" name="signals" value="shortGrowth" /> 近一年长高偏少</label>
+              <label><input type="checkbox" name="signals" value="severeObesity" /> 体重增长明显</label>
+              <label><input type="checkbox" name="signals" value="visionDrop" /> 视力下降或眯眼</label>
+              <label><input type="checkbox" name="signals" value="eyeFatigue" /> 眼疲劳/干涩/头痛</label>
+            </fieldset>
+            <button class="primary-button wide" type="submit">生成风险沟通报告</button>
+          </form>
+        </section>
+
+        <section class="view" id="agent" aria-labelledby="agentTitle">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Step 02</p>
+              <h3 id="agentTitle">可信问询与个性化科普</h3>
+            </div>
+            <button class="secondary-button" type="button" id="askAgent">模拟 Agent 追问</button>
+          </div>
+
+          <div class="agent-layout">
+            <section class="chat-panel" aria-label="问询对话">
+              <div class="message user">孩子有点胖，视力最近也下降，最近发育也提前了，我需要担心吗？</div>
+              <div class="message agent">我先帮您补全关键信息。请提供孩子年龄、性别、身高体重、发育表现出现时间、近一年长高、户外时间、近距离用眼和最近视力情况。</div>
+            </section>
+            <section class="report-panel" aria-label="风险沟通报告">
+              <h4>风险沟通摘要</h4>
+              <p id="reportText">完成自测后生成个性化摘要。</p>
+              <h4>科普建议</h4>
+              <ul id="adviceList">
+                <li>建议先完成基础信息填写。</li>
+              </ul>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="followup" aria-labelledby="followupTitle">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Step 03</p>
+              <h3 id="followupTitle">随访与群智反馈</h3>
+            </div>
+          </div>
+
+          <div class="timeline" id="timeline">
+            <article>
+              <span>今天</span>
+              <p>完成生长发育自测并阅读个性化科普建议。</p>
+            </article>
+            <article>
+              <span>2-4 周</span>
+              <p>记录运动、睡眠、饮食、户外时间和近距离用眼行为。</p>
+            </article>
+            <article>
+              <span>3 个月</span>
+              <p>复测身高体重和视力；如发育进展明显、增长异常或视力继续下降，建议基层儿保/眼保健评估。</p>
+            </article>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
